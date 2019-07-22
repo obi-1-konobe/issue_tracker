@@ -4,22 +4,22 @@ from django.db import models
 class Issue(models.Model):
     title = models.CharField(
         max_length=50,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name='Title',
     )
 
     description = models.TextField(
         max_length=200,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         verbose_name='Description',
     )
 
     author = models.CharField(
         max_length=50,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name='Author',
     )
 
@@ -47,8 +47,8 @@ class Issue(models.Model):
 
     performer = models.CharField(
         max_length=50,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         default='Unknown',
         verbose_name='Performed by'
     )
