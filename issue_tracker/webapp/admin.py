@@ -1,3 +1,6 @@
 from django.contrib import admin
+from webapp.models import Issue, IssueStatus, IssueType
 
-# Register your models here.
+admin.site.register(Issue)
+admin.site.register(IssueStatus)
+admin.site.register(IssueType)

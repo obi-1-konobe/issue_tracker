@@ -60,6 +60,9 @@ class Issue(models.Model):
         verbose_name='Issue status',
     )
 
+    def __str__(self):
+        return self.title
+
 
 class IssueType(models.Model):
     name = models.CharField(
@@ -69,6 +72,9 @@ class IssueType(models.Model):
         verbose_name='Issue type',
     )
 
+    def __str__(self):
+        return self.name
+
 
 class IssueStatus(models.Model):
     name = models.CharField(
@@ -77,3 +83,6 @@ class IssueStatus(models.Model):
         blank=True,
         verbose_name='Issue status',
     )
+
+    def __str__(self):
+        return self.name
