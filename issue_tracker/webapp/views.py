@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, TemplateView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, TemplateView, View
 
 from webapp.models import Issue, IssueType
+from webapp.forms import IssueTypeForm
 
 
 class IndexView(ListView):
@@ -29,3 +30,27 @@ class IssueTypesView(ListView):
     
     def get_queryset(self):
         return IssueType.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = IssueTypeForm()
+        context['form'] = form
+        return context
+    
+
+class IssueTypeCreateView(View):
+    def post(self, request, *args, **kwargs):
+        form = IssueTypeForm(data=request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            IssueType.objects.create(
+                name=data['name'],
+            )
+            return redirect('issue_types')
+        else:
+            return render(request, 'issue_types', context={'form': form})
+
+
+class IssueTypeUpdateView(View):
+    

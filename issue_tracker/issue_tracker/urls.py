@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('issue/<int:issue_pk>', views.IssueView.as_view(), name='issue'),
     path('issue_types', views.IssueTypesView.as_view(), name='issue_types'),
+    path('issue_types/create', views.IssueTypeCreateView.as_view(), name='create_issue_type'),
 ]

@@ -14,4 +14,8 @@
         </div>
     {% endfor %}
 
+    <form action="{% url 'create_issue_type' %}" method="post">
+        {% include 'partial/form.html' %}
+    </form>
+
 {% endblock %}
