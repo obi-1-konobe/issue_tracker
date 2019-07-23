@@ -71,3 +71,11 @@ class IssueTypeUpdateView(View):
             return redirect('issue_types')
         else:
             return render(request, 'update_issue_type.html', context={'form': form, 'issue_type': issue_type})
+        
+        
+class IssueTypeDeleteView(View):
+
+    def get(self, request, *args, **kwargs):
+        issue_type = get_object_or_404(IssueType, pk=kwargs['issue_type_pk'])
+        issue_type.delete()
+        return redirect('issue_types')

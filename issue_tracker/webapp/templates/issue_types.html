@@ -9,7 +9,10 @@
         <div class="card mb-1">
           <div class="card-header d-flex justify-content-between">
             <span>{{ issue_type.name }}</span>
-              <a href="{% url 'update_issue_type' issue_type.pk%}" class="btn btn-primary">Update</a>
+            <div>
+                <a href="{% url 'update_issue_type' issue_type.pk%}" class="btn btn-primary">Update</a>
+                <a href="{% url 'delete_issue_type' issue_type.pk%}" class="btn btn-primary">Delete</a>
+            </div>
           </div>
         </div>
     {% endfor %}
