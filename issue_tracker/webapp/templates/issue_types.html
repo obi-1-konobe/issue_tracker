@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Issue type{% endblock %}
+
+{% block content %}
+    <h1>Issue types</h1>
+
+    {% for issue_type in issue_types %}
+        <div class="card mb-1">
+          <div class="card-header d-flex justify-content-between">
+            <span>{{ issue_type.name }}</span>
+              <a href="#" class="btn btn-primary">Delete</a>
+          </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

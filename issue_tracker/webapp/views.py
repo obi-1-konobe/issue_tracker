@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, TemplateView
 
-from webapp.models import Issue
+from webapp.models import Issue, IssueType
 
 
 class IndexView(ListView):
@@ -21,3 +21,11 @@ class IssueView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['issue'] = get_object_or_404(Issue, pk=kwargs['issue_pk'])
         return context
+
+
+class IssueTypesView(ListView):
+    template_name = 'issue_types.html'
+    context_object_name = 'issue_types'
+    
+    def get_queryset(self):
+        return IssueType.objects.all()
