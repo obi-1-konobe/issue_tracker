@@ -53,4 +53,21 @@ class IssueTypeCreateView(View):
 
 
 class IssueTypeUpdateView(View):
-    
+    def get(self, request, *args, **kwargs):
+        issue_type = get_object_or_404(IssueType, pk=kwargs['issue_type_pk'])
+        form = IssueTypeForm(data={
+            'name': issue_type.name
+        })
+
+        return render(request, 'update_issue_type.html', context={'form': form, 'issue_type': issue_type})
+
+    def post(self, request, *args, **kwargs):
+        form = IssueTypeForm(data=request.POST)
+        issue_type = get_object_or_404(IssueType, pk=kwargs['issue_type_pk'])
+        if form.is_valid():
+            data = form.cleaned_data
+            issue_type.name = data['name']
+            issue_type.save()
+            return redirect('issue_types')
+        else:
+            return render(request, 'update_issue_type.html', context={'form': form, 'issue_type': issue_type})
