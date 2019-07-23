@@ -8,15 +8,14 @@
     {% endif %}
     {% for issue in issues %}
         <div class="card mb-3">
-          <div class="card-header">
-            {{ issue.title }}
+          <div class="card-header d-flex justify-content-between">
+            <span>{{ issue.title }}</span>
               <span class="text_small">
                   {{ issue.created_at|date:'d.m.Y' }} {{ issue.created_at|time:'H.i.s' }}
               </span>
           </div>
           <div class="card-body">
-            <p class="card-text">{{ issue.description }}</p>
-            <a href="#" class="btn btn-primary">More</a>
+            <a href="{% url 'issue' issue.pk %}" class="btn btn-primary">More</a>
           </div>
         </div>
     {% endfor %}

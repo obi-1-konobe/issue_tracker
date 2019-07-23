@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}article{% endblock %}
+
+{% block content %}
+    <div class="card">
+      <div class="card-header">
+        {{issue.title}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Author: {{ issue.author }}</h5>
+        <p class="card-text">{{ issue.description }}</p>
+      </div>
+    </div>
+
+{% endblock %}
