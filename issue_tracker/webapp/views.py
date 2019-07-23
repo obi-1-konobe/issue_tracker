@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, TemplateView, View
 
-from webapp.models import Issue, IssueType
-from webapp.forms import IssueTypeForm
+from webapp.models import Issue, IssueType, IssueStatus
+from webapp.forms import IssueTypeForm, IssueStatusForm
 
 
 class IndexView(ListView):
@@ -79,3 +79,17 @@ class IssueTypeDeleteView(View):
         issue_type = get_object_or_404(IssueType, pk=kwargs['issue_type_pk'])
         issue_type.delete()
         return redirect('issue_types')
+    
+    
+class IssueStatusesView(ListView):
+    template_name = 'issue_statuses.html'
+    context_object_name = 'issue_statuses'
+
+    def get_queryset(self):
+        return IssueStatus.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = IssueStatusForm()
+        context['form'] = form
+        return context

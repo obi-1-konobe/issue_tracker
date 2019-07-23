@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Issue statuses{% endblock %}
+
+{% block content %}
+    <h1>Issue statuses</h1>
+
+    {% for issue_status in issue_statuses %}
+        <div class="card mb-1">
+          <div class="card-header d-flex justify-content-between">
+            <span>{{ issue_status.name }}</span>
+            <div>
+                <a href="#" class="btn btn-primary">Update</a>
+                <a href="#" class="btn btn-primary">Delete</a>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+
+    <form action="#" method="post">
+        {% include 'partial/form.html' %}
+    </form>
+
+{% endblock %}
