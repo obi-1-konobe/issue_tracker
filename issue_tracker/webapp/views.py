@@ -128,3 +128,11 @@ class IssueStatusUpdateView(View):
             return redirect('issue_statuses')
         else:
             return render(request, 'update_issue_status.html', context={'form': form, 'issue_status': issue_status})
+
+
+class IssueStatusDeleteView(View):
+
+    def get(self, request, *args, **kwargs):
+        issue_status = get_object_or_404(IssueStatus, pk=kwargs['issue_status_pk'])
+        issue_status.delete()
+        return redirect('issue_statuses')
