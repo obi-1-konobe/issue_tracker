@@ -13,8 +13,9 @@
 </head>
 <body>
     <nav class="my_navbar">
-        <div class="container">
-            <ul class="menu">
+        <div class="container d-flex justify-content-between">
+            <h4>Issue tracker</h4>
+            <ul class="menu pt-2">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'issue_types' %}">Issue types</a></li>
                 <li><a href="{% url 'issue_statuses' %}">Issue statuses</a></li>
