@@ -107,3 +107,24 @@ class IssueStatusCreateView(View):
             return redirect('issue_statuses')
         else:
             return render(request, 'issue_statuses', context={'form': form})
+
+
+class IssueStatusUpdateView(View):
+    def get(self, request, *args, **kwargs):
+        issue_status = get_object_or_404(IssueStatus, pk=kwargs['issue_status_pk'])
+        form = IssueStatusForm(data={
+            'name': issue_status.name
+        })
+
+        return render(request, 'update_issue_status.html', context={'form': form, 'issue_status': issue_status})
+
+    def post(self, request, *args, **kwargs):
+        form = IssueStatusForm(data=request.POST)
+        issue_status = get_object_or_404(IssueStatus, pk=kwargs['issue_status_pk'])
+        if form.is_valid():
+            data = form.cleaned_data
+            issue_status.name = data['name']
+            issue_status.save()
+            return redirect('issue_statuses')
+        else:
+            return render(request, 'update_issue_status.html', context={'form': form, 'issue_status': issue_status})
