@@ -17,7 +17,7 @@
         </div>
     {% endfor %}
 
-    <form action="#" method="post">
+    <form action="{% url 'create_issue_status'%}" method="post">
         {% include 'partial/form.html' %}
     </form>
 

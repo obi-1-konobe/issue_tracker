@@ -93,3 +93,17 @@ class IssueStatusesView(ListView):
         form = IssueStatusForm()
         context['form'] = form
         return context
+
+
+class IssueStatusCreateView(View):
+    def post(self, request, *args, **kwargs):
+        form = IssueStatusForm(data=request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            IssueStatus.objects.create(
+                name=data['name'],
+            )
+            return redirect('issue_statuses')
+        else:
+            return render(request, 'issue_statuses', context={'form': form})
