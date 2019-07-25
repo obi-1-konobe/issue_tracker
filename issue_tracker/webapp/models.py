@@ -145,3 +145,6 @@ class Milestone(models.Model):
         auto_now_add=True,
         verbose_name='End time'
     )
+
+    def __str__(self):
+        return self.name
