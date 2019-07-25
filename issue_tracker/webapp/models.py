@@ -86,3 +86,55 @@ class IssueStatus(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Project(models.Model):
+    name = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        verbose_name='Title',
+    )
+
+    description = models.TextField(
+        max_length=200,
+        null=False,
+        blank=False,
+        verbose_name='Description',
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Milestone(models.Model):
+    project = models.ForeignKey(
+        'webapp.Project',
+        related_name='milestones',
+        on_delete=models.CASCADE,
+        verbose_name='Project'
+    )
+
+    name = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        verbose_name='Title',
+    )
+
+    description = models.TextField(
+        max_length=200,
+        null=False,
+        blank=False,
+        verbose_name='Description',
+    )
+
+    started_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Start time',
+    )
+
+    ended_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='End time'
+    )
