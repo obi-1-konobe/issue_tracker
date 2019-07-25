@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, TemplateView, View
 
-from webapp.models import Issue, IssueType, IssueStatus
+from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
 from webapp.forms import IssueTypeForm, IssueStatusForm
 
 
@@ -136,3 +136,10 @@ class IssueStatusDeleteView(View):
         issue_status = get_object_or_404(IssueStatus, pk=kwargs['issue_status_pk'])
         issue_status.delete()
         return redirect('issue_statuses')
+
+
+class ProjectListView(ListView):
+    model = Project
+    paginate_orphans = 1
+    paginate_by = 5
+    template_name = 'projects/list.html'

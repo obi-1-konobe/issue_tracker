@@ -1,0 +1,17 @@
+
+{% extends "base.html" %}
+
+{% block title_block %}Project Index{% endblock %}
+
+{% block content %}
+   <h1>Projects</h1>
+   {% if is_paginated %}
+       {% include 'partial/pagination.html' %}
+   {% endif %}
+        <div class="card mb-3">
+            {% include "projects/project_list.html" %}
+        </div>
+   {% if is_paginated %}
+       {% include 'partial/pagination.html' %}
+   {% endif %}
+{% endblock %}

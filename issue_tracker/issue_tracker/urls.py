@@ -21,6 +21,7 @@ from webapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.IndexView.as_view(), name='index'),
+    path('projects', views.ProjectListView.as_view(), name='project_list'),
     path('issue/<int:issue_pk>', views.IssueView.as_view(), name='issue'),
     path('issue_types', views.IssueTypesView.as_view(), name='issue_types'),
     path('issue_statuses', views.IssueStatusesView.as_view(), name='issue_statuses'),
