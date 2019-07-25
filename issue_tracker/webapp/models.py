@@ -2,6 +2,13 @@ from django.db import models
 
 
 class Issue(models.Model):
+    milestone = models.ForeignKey(
+        'webapp.Milestone',
+        related_name='issues',
+        on_delete=models.CASCADE,
+        verbose_name='Milestone',
+    )
+
     title = models.CharField(
         max_length=50,
         null=False,
