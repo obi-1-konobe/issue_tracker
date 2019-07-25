@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title_block %}Project{% endblock %}
+
+{% block content %}
+        <div class="card mb-3">
+          <div class="card-header d-flex justify-content-between">
+            <h1>{{ project.name }}</h1>
+          </div>
+          <div class="card-body">
+              <div>{{ project.description }}</div>
+          </div>
+        </div>
+{% endblock %}

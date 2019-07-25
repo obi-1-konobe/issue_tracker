@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, TemplateView, View
+from django.views.generic import ListView, TemplateView, View, DetailView
 
 from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
 from webapp.forms import IssueTypeForm, IssueStatusForm
@@ -143,3 +143,8 @@ class ProjectListView(ListView):
     paginate_orphans = 1
     paginate_by = 5
     template_name = 'projects/list.html'
+    
+    
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'projects/detail.html'
