@@ -148,3 +148,19 @@ class ProjectListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
     template_name = 'projects/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['milestone_list'] = self.object.milestones.all().order_by('-started_at')
+        return context
+
+
+class MilestoneDetailVIew(DetailView):
+    model = Milestone
+    template_name = 'milestones/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['issues_list'] = self.object.issues.all().order_by('-created_at')
+        return context
+    

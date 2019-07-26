@@ -5,12 +5,12 @@
 {% block content %}
         <div class="card mb-3">
           <div class="card-header d-flex justify-content-between">
-            <h1>{{ project.name }}</h1>
+            <h2>{{ milestone.name }}</h2>
           </div>
           <div class="card-body">
-              <div>{{ project.description }}</div>
+              <div>{{ milestone.description }}</div>
               <hr>
-              <div>{% include "milestones/milestone_list.html" %}</div>
+              <div>{% include "issue_list.html" %}</div>
           </div>
         </div>
 {% endblock %}
