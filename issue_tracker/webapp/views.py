@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, TemplateView, View, DetailView
 
 from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
-from webapp.forms import IssueTypeForm, IssueStatusForm
+from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm
 
 
 class IndexView(ListView):
@@ -10,7 +10,7 @@ class IndexView(ListView):
     context_object_name = 'issues'
     paginate_by = 3
     paginate_orphans = 1
-    
+
     def get_queryset(self):
         return Issue.objects.all().order_by('-created_at')
 
@@ -27,7 +27,7 @@ class IssueView(TemplateView):
 class IssueTypesView(ListView):
     template_name = 'issue_types.html'
     context_object_name = 'issue_types'
-    
+
     def get_queryset(self):
         return IssueType.objects.all()
 
@@ -36,7 +36,7 @@ class IssueTypesView(ListView):
         form = IssueTypeForm()
         context['form'] = form
         return context
-    
+
 
 class IssueTypeCreateView(View):
     def post(self, request, *args, **kwargs):
@@ -71,16 +71,16 @@ class IssueTypeUpdateView(View):
             return redirect('issue_types')
         else:
             return render(request, 'update_issue_type.html', context={'form': form, 'issue_type': issue_type})
-        
-        
+
+
 class IssueTypeDeleteView(View):
 
     def get(self, request, *args, **kwargs):
         issue_type = get_object_or_404(IssueType, pk=kwargs['issue_type_pk'])
         issue_type.delete()
         return redirect('issue_types')
-    
-    
+
+
 class IssueStatusesView(ListView):
     template_name = 'issue_statuses.html'
     context_object_name = 'issue_statuses'
@@ -143,8 +143,8 @@ class ProjectListView(ListView):
     paginate_orphans = 1
     paginate_by = 5
     template_name = 'projects/list.html'
-    
-    
+
+
 class ProjectDetailView(DetailView):
     model = Project
     template_name = 'projects/detail.html'
@@ -163,4 +163,19 @@ class MilestoneDetailVIew(DetailView):
         context = super().get_context_data(**kwargs)
         context['issues_list'] = self.object.issues.all().order_by('-created_at')
         return context
-    
+
+
+class SearchView(TemplateView):
+    template_name = 'search.html'
+
+    def get_context_data(self, *args, **kwargs):
+        form = SearchForm()
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('search')
+        if query:
+            search_project = Project.objects.filter(name__icontains=query)
+            context['search_list'] = search_project
+
+        context['form'] = form
+        return context
+

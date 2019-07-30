@@ -15,3 +15,11 @@ class IssueStatusForm(forms.Form):
         max_length=50,
         label='Issue status'
     )
+    
+
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        required=True,
+        max_length=50,
+        label='Search'
+    )

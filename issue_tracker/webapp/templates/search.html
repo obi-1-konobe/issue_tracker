@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}search{% endblock %}
+
+{% block content %}
+<h1>Search</h1>
+
+<form action="{% url 'search' %}" method="get">
+   {% include 'partial/form.html' %}
+</form>
+
+{% include 'partial/search_list.html' with results=search_list %}
+
+{% endblock %}
+

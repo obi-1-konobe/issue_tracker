@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.IndexView.as_view(), name='index'),
     path('projects', views.ProjectListView.as_view(), name='project_list'),
+    path('search', views.SearchView.as_view(), name='search'),
     path('issue/<int:issue_pk>', views.IssueView.as_view(), name='issue'),
     path('projects/<int:pk>', views.ProjectDetailView.as_view(), name='project_detail'),
     path('milestones/<int:pk>', views.MilestoneDetailVIew.as_view(), name='milestone_detail'),
