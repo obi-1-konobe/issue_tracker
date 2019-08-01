@@ -35,4 +35,6 @@ urlpatterns = [
     path('issue_statuses/<int:issue_status_pk>/update', views.IssueStatusUpdateView.as_view(), name='update_issue_status'),
     path('issue_types/<int:issue_type_pk>/delete', views.IssueTypeDeleteView.as_view(), name='delete_issue_type'),
     path('issue_statuses/<int:issue_status_pk>/delete', views.IssueStatusDeleteView.as_view(), name='delete_issue_status'),
+    path('issue/search', views.IssueSearchView.as_view(), name='issue_search'),
+    path('issue/search-results', views.IssueSearchResultsView.as_view(), name='issue_search_results'),
 ]

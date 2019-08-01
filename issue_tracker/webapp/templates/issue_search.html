@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_block %}
+   Поиск статьи
+{% endblock %}
+
+{% block content %}
+   <h2>Поиск по статьям</h2>
+   <form method="post">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button type="submit">Искать</button>
+   </form>
+{% endblock %}

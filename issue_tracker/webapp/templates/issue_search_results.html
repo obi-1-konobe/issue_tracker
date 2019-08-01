@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title_block %}Результаты поиска{% endblock %}
+
+{% block menu_links %}
+   <li><a href="{% url 'issue_search' %}">Новый поиск</a></li>
+{% endblock %}
+
+{% block content %}
+   <h1>Issues</h1>
+   {% if is_paginated %}
+       {% include 'partial/pagination.html' %}
+   {% endif %}
+   <hr>
+   {% for issue in issues %}
+       <h2>{{ issue.title }} <span class="text-small">{{ issue.created_at|date:'d.m.Y' }}
+           {{ issue.created_at|time:'H.i.s' }}</span></h2>
+   {% endfor %}
+   {% if is_paginated %}
+       {% include 'partial/pagination.html' %}
+   {% endif %}
+{% endblock %}

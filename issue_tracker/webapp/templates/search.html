@@ -9,6 +9,7 @@
 </form>
 
 {% include 'partial/search_list.html' with results=search_list %}
+<a href="{% url 'issue_search' %}">Issue search</a>
 
 {% endblock %}
 

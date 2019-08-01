@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, TemplateView, View, DetailView
+from django.utils.http import urlencode
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.views.generic import ListView, TemplateView, View, DetailView, FormView
 
 from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
-from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm
+from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm
 
 
 class IndexView(ListView):
@@ -179,3 +180,40 @@ class SearchView(TemplateView):
         context['form'] = form
         return context
 
+
+class IssueSearchView(FormView):
+    template_name = 'issue_search.html'
+    form_class = IssueSearchForm
+    search_query = {}
+
+    def form_valid(self, form):
+        self.search_query = form.cleaned_data.copy()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('issue_search_results') + '?' + urlencode(self.search_query)
+
+
+class IssueSearchResultsView(ListView):
+    template_name = 'issue_search_results.html'
+    context_object_name = 'issues'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['query'] = urlencode({
+            'description': self.request.GET.get('description')
+        })
+        return context
+
+    def get_queryset(self):
+        filter_kwargs = {
+            'description__icontains': self.request.GET.get('description')
+        }
+
+        non_empty_kwargs = {}
+        for key, value in filter_kwargs.items():
+            if value:
+                non_empty_kwargs[key] = value
+        if len(non_empty_kwargs) > 0:
+            return Issue.objects.filter(**non_empty_kwargs).distinct()
+        return Issue.objects.all()
