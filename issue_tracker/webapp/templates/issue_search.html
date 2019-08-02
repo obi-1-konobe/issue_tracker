@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-   <h2>Поиск по статьям</h2>
+   <h2>Issue extra search</h2>
    <form method="post">
        {% csrf_token %}
        {{ form.as_p }}
-       <button type="submit">Искать</button>
+       <button type="submit">Search</button>
    </form>
 {% endblock %}
