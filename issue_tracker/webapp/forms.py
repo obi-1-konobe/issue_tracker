@@ -27,10 +27,11 @@ class SearchForm(forms.Form):
 
 
 class IssueSearchForm(forms.Form):
-    # project = forms.ModelChoiceField(
-    #     required=True,
-    #     queryset=Project.objects.all()
-    # )
+    project = forms.ModelChoiceField(
+        required=True,
+        queryset=Project.objects.all()
+    )
+
     status = forms.ModelChoiceField(
         required=False,
         queryset=IssueStatus.objects.all(),

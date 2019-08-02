@@ -210,13 +210,13 @@ class IssueSearchResultsView(ListView):
         filter_kwargs = {
             'description__icontains': self.request.GET.get('description'),
             'issue_status__name__exact': self.request.GET.get('status'),
-            'issue_type__name__exact': self.request.GET.get('type')
+            'issue_type__name__exact': self.request.GET.get('type'),
+            'milestone__project__name__exact': self.request.GET.get('project')
         }
-        print(self.request.GET.get('status'))
 
         non_empty_kwargs = {}
         for key, value in filter_kwargs.items():
-            if value:
+            if value != 'None' and value:
                 non_empty_kwargs[key] = value
         if len(non_empty_kwargs) > 0:
             return Issue.objects.filter(**non_empty_kwargs).distinct()
