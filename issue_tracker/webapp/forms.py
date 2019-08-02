@@ -1,5 +1,5 @@
 from django import forms
-from webapp.models import Project
+from webapp.models import Project, IssueStatus, IssueType
 
 
 class IssueTypeForm(forms.Form):
@@ -31,6 +31,15 @@ class IssueSearchForm(forms.Form):
     #     required=True,
     #     queryset=Project.objects.all()
     # )
+    status = forms.ModelChoiceField(
+        required=False,
+        queryset=IssueStatus.objects.all(),
+    )
+
+    type = forms.ModelChoiceField(
+        required=False,
+        queryset=IssueType.objects.all(),
+    )
 
     description = forms.CharField(
         max_length=100,

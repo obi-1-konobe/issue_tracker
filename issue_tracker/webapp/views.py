@@ -201,14 +201,18 @@ class IssueSearchResultsView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['query'] = urlencode({
-            'description': self.request.GET.get('description')
+            'description': self.request.GET.get('description'),
+            'status': self.request.GET.get('status'),
         })
         return context
 
     def get_queryset(self):
         filter_kwargs = {
-            'description__icontains': self.request.GET.get('description')
+            'description__icontains': self.request.GET.get('description'),
+            'issue_status__name__exact': self.request.GET.get('status'),
+            'issue_type__name__exact': self.request.GET.get('type')
         }
+        print(self.request.GET.get('status'))
 
         non_empty_kwargs = {}
         for key, value in filter_kwargs.items():
