@@ -1,9 +1,9 @@
 from django.utils.http import urlencode
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.views.generic import ListView, TemplateView, View, DetailView, FormView
+from django.views.generic import ListView, TemplateView, View, DetailView, FormView, CreateView
 
 from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
-from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm
+from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm, ProjectForm
 
 
 class IndexView(ListView):
@@ -221,3 +221,12 @@ class IssueSearchResultsView(ListView):
         if len(non_empty_kwargs) > 0:
             return Issue.objects.filter(**non_empty_kwargs).distinct()
         return Issue.objects.all()
+
+
+class ProjectCreateView(CreateView):
+    template_name = 'projects/create.html'
+    model = Project
+    form_class = ProjectForm
+
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.pk})

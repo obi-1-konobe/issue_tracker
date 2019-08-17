@@ -37,4 +37,5 @@ urlpatterns = [
     path('issue_statuses/<int:issue_status_pk>/delete', views.IssueStatusDeleteView.as_view(), name='delete_issue_status'),
     path('issue/search', views.IssueSearchView.as_view(), name='issue_search'),
     path('issue/search-results', views.IssueSearchResultsView.as_view(), name='issue_search_results'),
+    path('create_projects', views.ProjectCreateView.as_view(), name='create_project')
 ]
