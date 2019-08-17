@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import ListView, TemplateView, View, DetailView, FormView, CreateView
 
 from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
-from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm, ProjectForm
+from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm, ProjectForm, MilestoneForm
 
 
 class IndexView(ListView):
@@ -230,3 +230,23 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})
+
+
+class MilestoneCreateView(CreateView):
+    template_name = 'milestones/create.html'
+    model = Milestone
+    form_class = MilestoneForm
+
+    def form_valid(self, form):
+        form.instance.project = self.get_project()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        kwargs['project'] = self.get_project()
+        return super().get_context_data(**kwargs)
+
+    def get_project(self):
+        return Project.objects.get(pk=self.kwargs.get('pk'))
+
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.project.pk})

@@ -6,6 +6,7 @@
         <div class="card mb-3">
           <div class="card-header d-flex justify-content-between">
             <h1>{{ project.name }}</h1>
+              <a href="{% url 'create_milestone' project.pk %}">Add new milestone</a>
           </div>
           <div class="card-body">
               <div>{{ project.description }}</div>
