@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, UpdateView
 from webapp.forms import MilestoneForm
 from webapp.models import Milestone, Project
 
@@ -32,3 +32,13 @@ class MilestoneCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.project.pk})
+
+
+class MilestoneUpdateView(UpdateView):
+    model = Milestone
+    template_name = 'milestones/update.html'
+    form_class = MilestoneForm
+    pk_url_kwarg = 'pk'
+
+    def get_success_url(self):
+        return reverse('milestone_detail', kwargs={'pk': self.object.pk})

@@ -6,7 +6,11 @@
         <div class="card mb-3">
           <div class="card-header d-flex justify-content-between">
             <h1>{{ project.name }}</h1>
-              <a href="{% url 'create_milestone' project.pk %}">Add new milestone</a>
+              <div>
+                  <a class="btn btn-primary" href="{% url 'create_milestone' project.pk %}">Add new milestone</a>
+                  <a class="btn btn-primary" href="{% url 'update_project' project.pk %}">Update</a>
+                  <a class="btn btn-primary" href="{% url 'delete_project' project.pk %}">Delete</a>
+              </div>
           </div>
           <div class="card-body">
               <div>{{ project.description }}</div>

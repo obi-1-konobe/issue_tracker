@@ -44,4 +44,10 @@ urlpatterns = [
     path('create_projects', webapp.views.project_views.ProjectCreateView.as_view(), name='create_project'),
     path('projects/<int:pk>/create_milestone', webapp.views.milestone_views.MilestoneCreateView.as_view(), name='create_milestone'),
     path('milestones/<int:pk>/create_issue', webapp.views.issue_views.IssueCreateView.as_view(), name='create_issue'),
+    path('projects/<int:pk>/update', webapp.views.project_views.ProjectUpdateView.as_view(), name='update_project'),
+    path('milestones/<int:pk>/update', webapp.views.milestone_views.MilestoneUpdateView.as_view(), name='update_milestone'),
+    path('issue/<int:issue_pk>/update', webapp.views.issue_views.IssueUpdateView.as_view(), name='update_issue'),
+    path('projects/<int:pk>/delete', webapp.views.project_views.ProjectDeleteView.as_view(), name='delete_project'),
+
+
 ]

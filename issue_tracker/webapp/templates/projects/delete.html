@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}update project{% endblock %}
+
+{% block content %}
+<h1>Do you want delete project: {{ project.name }}?</h1>
+
+<form action="{% url 'delete_project' project.pk %}" method="post">
+   {% csrf_token %}
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary mr-3" type="submit">Yes</button>
+        <a class="btn btn-primary" href="{% url 'project_detail' project.pk %}">No</a>
+    </div>
+</form>
+{% endblock %}
+

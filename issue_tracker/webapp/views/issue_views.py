@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views import View
-from django.views.generic import ListView, TemplateView, CreateView
+from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 from webapp.forms import IssueTypeForm, IssueStatusForm, IssueForm
 from webapp.models import Issue, IssueType, IssueStatus, Milestone
 
@@ -157,3 +157,13 @@ class IssueCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('milestone_detail', kwargs={'pk': self.object.milestone.pk})
+
+
+class IssueUpdateView(UpdateView):
+    model = Issue
+    template_name = 'issues/update.html'
+    form_class = IssueForm
+    pk_url_kwarg = 'issue_pk'
+
+    def get_success_url(self):
+        return reverse('issue', kwargs={'issue_pk': self.object.pk})
