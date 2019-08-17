@@ -3,13 +3,13 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import ListView, TemplateView, View, DetailView, FormView, CreateView
 
 from webapp.models import Issue, IssueType, IssueStatus, Project, Milestone
-from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm, ProjectForm, MilestoneForm
+from webapp.forms import IssueTypeForm, IssueStatusForm, SearchForm, IssueSearchForm, ProjectForm, MilestoneForm, IssueForm
 
 
 class IndexView(ListView):
     template_name = 'index.html'
     context_object_name = 'issues'
-    paginate_by = 3
+    paginate_by = 10
     paginate_orphans = 1
 
     def get_queryset(self):
@@ -142,7 +142,7 @@ class IssueStatusDeleteView(View):
 class ProjectListView(ListView):
     model = Project
     paginate_orphans = 1
-    paginate_by = 5
+    paginate_by = 10
     template_name = 'projects/list.html'
 
 
@@ -250,3 +250,23 @@ class MilestoneCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.project.pk})
+
+
+class IssueCreateView(CreateView):
+    template_name = 'issue_create.html'
+    model = Issue
+    form_class = IssueForm
+
+    def form_valid(self, form):
+        form.instance.milestone = self.get_milestone()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        kwargs['milestone'] = self.get_milestone()
+        return super().get_context_data(**kwargs)
+
+    def get_milestone(self):
+        return Milestone.objects.get(pk=self.kwargs.get('pk'))
+
+    def get_success_url(self):
+        return reverse('milestone_detail', kwargs={'pk': self.object.milestone.pk})
