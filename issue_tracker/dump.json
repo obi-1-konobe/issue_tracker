@@ -65,27 +65,11 @@
 },
 {
   "model": "webapp.issue",
-  "pk": 5,
-  "fields": {
-    "milestone": 3,
-    "title": "321",
-    "description": "123",
-    "author": "123",
-    "issue_type": 1,
-    "created_at": "2019-08-17T11:01:14.627Z",
-    "started_at": "2019-08-17T11:01:14.627Z",
-    "ended_at": "2019-08-17T11:01:14.627Z",
-    "performer": "Unknown",
-    "issue_status": 1
-  }
-},
-{
-  "model": "webapp.issue",
   "pk": 6,
   "fields": {
     "milestone": 2,
     "title": "Homework issue 4",
-    "description": "",
+    "description": "desc",
     "author": "Aldik",
     "issue_type": 3,
     "created_at": "2019-08-17T11:04:47.619Z",
@@ -142,7 +126,7 @@
   "pk": 1,
   "fields": {
     "name": "Homework project",
-    "description": "project desc"
+    "description": "new project desc"
   }
 },
 {
@@ -151,22 +135,6 @@
   "fields": {
     "name": "project 2",
     "description": "desc"
-  }
-},
-{
-  "model": "webapp.project",
-  "pk": 3,
-  "fields": {
-    "name": "123",
-    "description": "321"
-  }
-},
-{
-  "model": "webapp.project",
-  "pk": 4,
-  "fields": {
-    "name": "321",
-    "description": "123"
   }
 },
 {
@@ -189,17 +157,6 @@
     "description": "milestone desc",
     "started_at": "2019-07-25T17:22:27.719Z",
     "ended_at": "2019-07-25T17:22:27.719Z"
-  }
-},
-{
-  "model": "webapp.milestone",
-  "pk": 3,
-  "fields": {
-    "project": 3,
-    "name": "milestone 123",
-    "description": "123",
-    "started_at": "2019-08-17T10:34:42.314Z",
-    "ended_at": "2019-08-17T10:34:42.314Z"
   }
 },
 {
