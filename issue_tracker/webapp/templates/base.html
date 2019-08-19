@@ -21,6 +21,13 @@
                 <li><a href="{% url 'webapp:issue_statuses' %}">Issue statuses</a></li>
                 <li><a href="{% url 'webapp:project_list' %}">Projects</a></li>
                 <li><a href="{% url 'webapp:search' %}">Search</a></li>
+                {% if user.is_authenticated %}
+                    <li class="menu-right"><a href="{% url 'accounts:logout' %}" class="nav-link">Выход</a></li>
+                    <li class="menu-right">Привет, {{ user.username }}!</li>
+                {% else %}
+                    <li class="menu-right"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
+                {% endif %}
+
                 {% block menu %}
 
                 {% endblock %}

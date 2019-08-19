@@ -52,6 +52,11 @@ class IssueTypeCreateView(View):
         else:
             return render(request, 'issue_types', context={'form': form})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IssueTypeUpdateView(View):
     def get(self, request, *args, **kwargs):
@@ -73,6 +78,11 @@ class IssueTypeUpdateView(View):
         else:
             return render(request, 'update_issue_type.html', context={'form': form, 'issue_type': issue_type})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IssueTypeDeleteView(View):
 
@@ -80,6 +90,11 @@ class IssueTypeDeleteView(View):
         issue_type = get_object_or_404(IssueType, pk=kwargs['issue_type_pk'])
         issue_type.delete()
         return redirect('issue_types')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class IssueStatusesView(ListView):
@@ -109,6 +124,11 @@ class IssueStatusCreateView(View):
         else:
             return render(request, 'issue_statuses', context={'form': form})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IssueStatusUpdateView(View):
     def get(self, request, *args, **kwargs):
@@ -130,6 +150,11 @@ class IssueStatusUpdateView(View):
         else:
             return render(request, 'update_issue_status.html', context={'form': form, 'issue_status': issue_status})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IssueStatusDeleteView(View):
 
@@ -137,6 +162,11 @@ class IssueStatusDeleteView(View):
         issue_status = get_object_or_404(IssueStatus, pk=kwargs['issue_status_pk'])
         issue_status.delete()
         return redirect('issue_statuses')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class IssueCreateView(CreateView):
@@ -158,6 +188,11 @@ class IssueCreateView(CreateView):
     def get_success_url(self):
         return reverse('webapp:milestone_detail', kwargs={'pk': self.object.milestone.pk})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IssueUpdateView(UpdateView):
     model = Issue
@@ -168,6 +203,11 @@ class IssueUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('webapp:issue', kwargs={'issue_pk': self.object.pk})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IssueDeleteView(DeleteView):
     model = Issue
@@ -176,3 +216,8 @@ class IssueDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('webapp:milestone_detail', kwargs={'pk': self.object.milestone.pk})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)

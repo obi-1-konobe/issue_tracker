@@ -1,3 +1,5 @@
+from django.shortcuts import redirect
+
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from webapp.forms import MilestoneForm
@@ -18,6 +20,11 @@ class MilestoneCreateView(CreateView):
     template_name = 'milestones/create.html'
     model = Milestone
     form_class = MilestoneForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.project = self.get_project()
@@ -40,6 +47,11 @@ class MilestoneUpdateView(UpdateView):
     form_class = MilestoneForm
     pk_url_kwarg = 'pk'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('webapp:milestone_detail', kwargs={'pk': self.object.pk})
 
@@ -48,6 +60,11 @@ class MilestoneDeleteView(DeleteView):
     model = Milestone
     template_name = 'milestones/delete.html'
     pk_url_kwarg = 'pk'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('webapp:project_detail', kwargs={'pk': self.object.project.pk})
