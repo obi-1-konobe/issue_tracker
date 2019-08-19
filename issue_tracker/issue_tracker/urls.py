@@ -21,7 +21,7 @@ from django.contrib import admin
 from django.urls import path
 
 from webapp import views
-
+from accounts.views import login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,6 +50,7 @@ urlpatterns = [
     path('projects/<int:pk>/delete', webapp.views.project_views.ProjectDeleteView.as_view(), name='delete_project'),
     path('milestones/<int:pk>/delete', webapp.views.milestone_views.MilestoneDeleteView.as_view(), name='delete_milestone'),
     path('issue/<int:issue_pk>/delete', webapp.views.issue_views.IssueDeleteView.as_view(), name='delete_issue'),
-
+    path('accounts/login', login_view, name='login'),
+    path('accounts/logout', logout_view, name='logout'),
 
 ]
