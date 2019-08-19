@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Create project</h1>
 
-<form action="{% url 'create_project' %}" method="post">
+<form action="{% url 'webapp:create_project' %}" method="post">
     {% include 'partial/form.html' %}
 </form>
 {% endblock %}

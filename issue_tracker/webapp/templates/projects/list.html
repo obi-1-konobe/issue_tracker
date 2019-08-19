@@ -9,7 +9,7 @@
        {% include 'partial/pagination.html' %}
    {% endif %}
         <div class="mb-3 text-right">
-            <a href="{% url 'create_project' %}">Create new project</a>
+            <a href="{% url 'webapp:create_project' %}">Create new project</a>
         </div>
         <div class="card mb-3">
             {% include "projects/project_list.html" %}

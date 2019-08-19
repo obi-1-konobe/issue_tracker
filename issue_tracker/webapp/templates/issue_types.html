@@ -10,14 +10,14 @@
           <div class="card-header d-flex justify-content-between">
             <span>{{ issue_type.name }}</span>
             <div>
-                <a href="{% url 'update_issue_type' issue_type.pk%}" class="btn btn-primary">Update</a>
-                <a href="{% url 'delete_issue_type' issue_type.pk%}" class="btn btn-primary">Delete</a>
+                <a href="{% url 'webapp:update_issue_type' issue_type.pk%}" class="btn btn-primary">Update</a>
+                <a href="{% url 'webapp:delete_issue_type' issue_type.pk%}" class="btn btn-primary">Delete</a>
             </div>
           </div>
         </div>
     {% endfor %}
 
-    <form action="{% url 'create_issue_type' %}" method="post">
+    <form action="{% url 'webapp:create_issue_type' %}" method="post">
         {% include 'partial/form.html' %}
     </form>
 

@@ -1,6 +1,6 @@
 {% for issue in issues_list %}
           <div class="card-header">
-            <div><span>Issue: <a href="{% url 'issue' issue.pk %}">{{ issue.title }}</a></span></div>
+            <div><span>Issue: <a href="{% url 'webapp:issue' issue.pk %}">{{ issue.title }}</a></span></div>
             <div><span>Primary key: {{ issue.pk }}</span></div>
           </div>
 {% endfor %}

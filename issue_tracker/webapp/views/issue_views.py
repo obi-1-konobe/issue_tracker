@@ -156,7 +156,7 @@ class IssueCreateView(CreateView):
         return Milestone.objects.get(pk=self.kwargs.get('pk'))
 
     def get_success_url(self):
-        return reverse('milestone_detail', kwargs={'pk': self.object.milestone.pk})
+        return reverse('webapp:milestone_detail', kwargs={'pk': self.object.milestone.pk})
 
 
 class IssueUpdateView(UpdateView):
@@ -166,7 +166,7 @@ class IssueUpdateView(UpdateView):
     pk_url_kwarg = 'issue_pk'
 
     def get_success_url(self):
-        return reverse('issue', kwargs={'issue_pk': self.object.pk})
+        return reverse('webapp:issue', kwargs={'issue_pk': self.object.pk})
 
 
 class IssueDeleteView(DeleteView):
@@ -175,4 +175,4 @@ class IssueDeleteView(DeleteView):
     pk_url_kwarg = 'issue_pk'
 
     def get_success_url(self):
-        return reverse('milestone_detail', kwargs={'pk': self.object.milestone.pk})
+        return reverse('webapp:milestone_detail', kwargs={'pk': self.object.milestone.pk})

@@ -3,7 +3,7 @@
 {% block title_block %}Результаты поиска{% endblock %}
 
 {% block menu %}
-   <li><a href="{% url 'issue_search' %}">Extra search</a></li>
+   <li><a href="{% url 'webapp:issue_search' %}">Extra search</a></li>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
    <hr>
    {% for issue in issues %}
     <div class="d-flex justify-content-between">
-        <a href="{% url 'issue' issue.pk %}">{{ issue.title }}</a>
+        <a href="{% url 'webapp:issue' issue.pk %}">{{ issue.title }}</a>
         <p>{{ issue.created_at|date:'d.m.Y' }} {{ issue.created_at|time:'H.i.s' }}</p>
     </div>
    {% endfor %}

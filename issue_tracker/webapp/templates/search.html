@@ -4,13 +4,13 @@
 {% block content %}
 <h1>Search</h1>
 
-<form action="{% url 'search' %}" method="get">
+<form action="{% url 'webapp:search' %}" method="get">
    {% include 'partial/form.html' %}
 </form>
 
 {% include 'partial/search_list.html' with results=search_list %}
 <div class="mt-3">
-   <a href="{% url 'issue_search' %}">Issue extra search</a>
+   <a href="{% url 'webapp:issue_search' %}">Issue extra search</a>
 </div>
 
 {% endblock %}

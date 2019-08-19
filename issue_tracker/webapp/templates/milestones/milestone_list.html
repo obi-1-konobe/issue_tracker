@@ -1,6 +1,6 @@
 {% for milestone in milestone_list %}
           <div class="card-header d-flex justify-content-between">
-            <h2><a href="{% url 'milestone_detail' milestone.pk %}" >{{ milestone.name }}</a></h2>
+            <h2><a href="{% url 'webapp:milestone_detail' milestone.pk %}" >{{ milestone.name }}</a></h2>
               <div>
                   <span>started at: {{ milestone.started_at|date:'d.m.Y' }} {{ milestone.started_at|time:'H:i:s' }}</span>
               </div>
@@ -9,7 +9,7 @@
                 <span>{{ milestone.description }}</span>
                 <hr>
                 {% for issue in milestone.issues.all %}
-                <div><a href="{% url 'issue' issue.pk %}">{{ issue.title }}</a></div>
+                <div><a href="{% url 'webapp:issue' issue.pk %}">{{ issue.title }}</a></div>
                 {% endfor %}
             </div>
 {% endfor %}

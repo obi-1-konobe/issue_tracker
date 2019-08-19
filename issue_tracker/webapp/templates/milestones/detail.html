@@ -7,9 +7,9 @@
           <div class="card-header d-flex justify-content-between">
             <h2>{{ milestone.name }}</h2>
               <div>
-                  <a class="btn btn-primary" href="{% url 'create_issue' milestone.pk %}">Add new issue</a>
-                  <a class="btn btn-primary" href="{% url 'update_milestone' milestone.pk %}">Update</a>
-                  <a class="btn btn-primary" href="{% url 'delete_milestone' milestone.pk %}">Delete</a>
+                  <a class="btn btn-primary" href="{% url 'webapp:create_issue' milestone.pk %}">Add new issue</a>
+                  <a class="btn btn-primary" href="{% url 'webapp:update_milestone' milestone.pk %}">Update</a>
+                  <a class="btn btn-primary" href="{% url 'webapp:delete_milestone' milestone.pk %}">Delete</a>
               </div>
           </div>
           <div class="card-body">

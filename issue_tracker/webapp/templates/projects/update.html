@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Update project</h1>
 
-<form action="{% url 'update_project' project.pk %}" method="post">
+<form action="{% url 'webapp:update_project' project.pk %}" method="post">
    {% include 'partial/form.html' %}
 </form>
 {% endblock %}

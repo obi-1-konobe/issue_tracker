@@ -30,7 +30,7 @@ class IssueSearchView(FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('issue_search_results') + '?' + urlencode(self.search_query)
+        return reverse('webapp:issue_search_results') + '?' + urlencode(self.search_query)
 
 
 class IssueSearchResultsView(ListView):
