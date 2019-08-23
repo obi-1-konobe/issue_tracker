@@ -23,7 +23,7 @@
                 <li><a href="{% url 'webapp:search' %}">Search</a></li>
                 {% if user.is_authenticated %}
                     <li class="menu-right"><a href="{% url 'accounts:logout' %}" class="nav-link">Выход</a></li>
-                    <li class="menu-right">Привет, {{ user.username }}!</li>
+                    <li class="menu-right">Привет, <a href="{% url 'accounts:user_detail' user.pk %}">{{ user.username }}</a>!</li>
                 {% else %}
                     <li class="menu-right"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
                     <li class="menu-right"><a href="{% url 'accounts:create' %}" class="nav-link">Регистрация</a></li>
