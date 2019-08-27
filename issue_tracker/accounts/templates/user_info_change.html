@@ -9,7 +9,7 @@
 
 {% block content %}
     <h1>Личный кабинет</h1>
-    <form action="{% url 'accounts:user_update' user.pk %}" method="post">
+    <form action="{% url 'accounts:user_update' user.pk %}" method="post" enctype="multipart/form-data">
         {% include 'partial/form.html' %}
     </form>
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "base_accounts.html" %}
-
+{% load staticfiles %}
 {% block title %}User {{ user_obj.username }} {% endblock %}
 
 {% block menu %}
@@ -11,8 +11,17 @@
 
 {% block content %}
     <h1>Личный кабинет</h1>
+    {% if user_obj.profile.avatar %}
+        <img src="{{ user_obj.profile.avatar.url }}" width="250" height="250">
+    {% else %}
+        <img src="{% static '/user.jpg' %}" alt="ima">
+    {% endif %}
     <p>Имя пользователя: {{ user_obj.username }}</p>
     <p>Имя: {{ user_obj.first_name }}</p>
     <p>Фамилия: {{ user_obj.last_name }}</p>
     <p>Почта: {{ user_obj.email }}</p>
+    <p>Дата рождения: {{ user_obj.profile.birth_date|date:'d.m.y' }}</p>
+    <p>О себе: {{ user_obj.profile.about_me }}</p>
+    <p>Ссылка на github: <a href="#">{{ user_obj.profile.github_link }}</a></p>
+
 {% endblock %}

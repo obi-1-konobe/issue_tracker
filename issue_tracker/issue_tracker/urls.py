@@ -23,8 +23,11 @@ from django.urls import path, include
 from webapp import views
 from accounts.views import login_view, logout_view
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('', include('webapp.urls', namespace='webapp')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
