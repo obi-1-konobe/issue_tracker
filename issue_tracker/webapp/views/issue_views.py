@@ -176,6 +176,7 @@ class IssueCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.milestone = self.get_milestone()
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -206,6 +207,9 @@ class IssueUpdateView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('accounts:login')
+        issue = Issue.objects.get(pk=self.kwargs.get('issue_pk'))
+        if issue.author != self.request.user or not self.request.user.is_superuser:
+            return redirect('accounts:login')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -219,5 +223,8 @@ class IssueDeleteView(DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        issue = Issue.objects.get(pk=self.kwargs.get('issue_pk'))
+        if issue.author != self.request.user or not self.request.user.is_superuser:
             return redirect('accounts:login')
         return super().dispatch(request, *args, **kwargs)

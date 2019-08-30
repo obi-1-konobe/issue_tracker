@@ -64,4 +64,4 @@ class MilestoneForm(forms.ModelForm):
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ['title', 'description', 'author', 'issue_type', 'performer', 'issue_status']
+        fields = ['title', 'description', 'issue_type', 'performer', 'issue_status']

@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from django.db import models
 
 
@@ -23,11 +25,11 @@ class Issue(models.Model):
         verbose_name='Description',
     )
 
-    author = models.CharField(
-        max_length=50,
-        null=False,
-        blank=False,
-        verbose_name='Author',
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='issues',
+        on_delete=models.PROTECT,
+
     )
 
     issue_type = models.ForeignKey(
@@ -52,12 +54,10 @@ class Issue(models.Model):
         verbose_name='End time'
     )
 
-    performer = models.CharField(
-        max_length=50,
-        null=False,
-        blank=False,
-        default='Unknown',
-        verbose_name='Performed by'
+    performer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='issue_performer',
+        on_delete=models.PROTECT,
     )
 
     issue_status = models.ForeignKey(
